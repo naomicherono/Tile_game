@@ -2,7 +2,7 @@
 .flex-container{
     background-color: rgb(36, 145, 145);
     margin-left: 100px;
-    height:700px;
+    height:800px;
     display: flex;
     flex-direction: row;
     padding: 0px;
@@ -56,4 +56,8 @@
     flex-direction: row;
 } */
   
- 
+ .logo{
+    padding: 10px;
+    height: 120px;
+
+ }
