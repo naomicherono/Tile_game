@@ -26,5 +26,25 @@
 
 }
 
-
-
+.square1{
+    background-color: aliceblue; 
+     margin: 10px;
+     border-radius: 5px ;
+     height: 120px;
+     width:120px ;
+     text-align: center;
+     margin-top: 50px;
+ 
+ }
+ .square2{
+     background-color: aliceblue; 
+      margin: 10px;
+      border-radius: 5px ;
+      height: 120px;
+      width:120px ;
+      text-align: center;
+      margin-top: 50px;
+ }
+  
+  
+ 
