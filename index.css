@@ -1,70 +1,74 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-.flex-container{
-    background-color: rgb(36, 145, 145);
-    margin-left:0px;
-    height:800px;
-    display: flex;
-    flex-direction: row;
-    padding: 0px;
-    justify-content: space-around;
-    width: 750px;
-    flex-wrap: wrap;
-    
-    
-    
-    
-
-
-
-}
-.square1{
-   background-color: aliceblue; 
-    margin: 10px;
-    border-radius: 5px ;
-    height: 150px;
-    width:150px ;
-     text-align: center;
-     margin-top: 60px;
-    
-
-    
-
-}
-
- .square2{
-     background-color: aliceblue; 
-      margin:10px;
-      border-radius: 5px ;
-      height: 150px;
-      width:150px ;
-      text-align: center;
-      
- }
- .square3{
-    background-color: aliceblue; 
-     margin: 10px;
-     border-radius: 5px ;
-     height: 150px;
-     width:150px ;
-     text-align: center;
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
     
 } 
-  
- .logo{
-    padding: 10px;
-    height: 120px;
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: whitesmoke;
+}
 
- }
- .king{
-    padding-top: 20px;
-    height: 100px;
-    width: 100px;
- }
- .head{
-    font-size: medium;
- }
- body{
-     background-color: rgb(218, 159, 82);
-     justify-content: center;
+.card .back img{
+    max-width: 80px;
+}
 
- }
+.container{
+    height: 500px;
+    width: 500px;
+    background-color: rgb(214, 133, 27);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 0 10px;
+}
+.cards,.card,.view{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cards{
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+}
+
+.cards .card {
+    position: relative;
+    perspective: 800px;
+    transform-style: preserve-3d;
+    height: calc(100% / 4 - 10px);
+    width: calc(100% / 4 - 10px);
+
+}
+
+.cards .card .view {
+    width: 100%;
+    height: 100%;
+    background-color: #f9fcf7;
+    border-radius: 5px 0;
+    transition: transform 0.25s linear;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.card .front {
+    color: #881c1c;
+    
+}
+.card .back{
+    transform: rotateY(-180deg);
+    
+}
+.card:hover .back{
+    transform: rotateY(0);
+
+}
+.card:hover .front {
+    transform: rotateY(180deg);
+}
