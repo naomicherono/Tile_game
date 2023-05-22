@@ -6,12 +6,27 @@
     box-sizing: border-box;
     
 } 
+.rating {
+    color: gold; 
+  }
+  
+  .rating i {
+    margin-right: 5px; 
+  }
+  
 body{
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background-color: rgb(205, 223, 107);
+}
+h1{
+    margin-bottom: 700px;
+    margin-right: -600px;
+}
+p{
+    
 }
 
 .card .back img{
@@ -124,7 +139,7 @@ body{
   @keyframes matchAnimation {
     0% {
       transform: scale(1);
-      background-color: yellow; 
+      /* background-color: yellow;  */
     }
     50% {
       transform: scale(1.2);

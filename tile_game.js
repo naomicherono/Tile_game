@@ -3,7 +3,9 @@ let cardOne, cardTwo;
 let disableDeck = false;
 let matchedCard = 0;
 let moves = 0;
+const stars = document.querySelectorAll('.fa-star');
 let timer = null;
+
 
 function flipCard(e){ 
     let clickedCard = e.target; 
@@ -27,7 +29,15 @@ function matchCards(img1, img2){
                 showCongratulations() ;
                 return shuffleCard();
             }, 1200); 
-        }
+            
+        
+        moves++;
+        updateMoves();
+      }
+      updateMoves();
+
+    
+          
     cardOne.removeEventListener('click', flipCard);
     cardTwo.removeEventListener('click', flipCard);
     cardOne.classList.add('match');
@@ -47,15 +57,31 @@ function matchCards(img1, img2){
             disableDeck = false;
         }, 1200);
     }
-    moves++;
-    updateMoves();
+  
 }
+function updateRating() {
+    if (moves <= 10) {
+      
+      stars.forEach(star => star.style.display = 'inline');
+    } else if (moves <= 20) {
+      
+      stars[2].style.display = 'none';
+    } else {
+      
+      stars[1].style.display = 'none';
+    }
+  }
 
 
 function updateMoves() {
     const movesText = document.getElementById('moves');
-    movesText.textContent = `Moves: ${moves}`;
+    movesText.textContent = moves.toString();
+    updateRating();
+
+
 }
+
+
 
 function startTimer() {
     let seconds = 0;
