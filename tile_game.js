@@ -5,6 +5,10 @@ let matchedCard = 0;
 let moves = 0;
 const stars = document.querySelectorAll('.fa-star');
 let timer = null;
+let seconds =0;
+
+const restartButton = document.getElementById('restart-button');
+restartButton.addEventListener('click', restartGame);
 
 
 function flipCard(e){ 
@@ -26,7 +30,7 @@ function matchCards(img1, img2){
         matchedCard++; 
         if(matchedCard == 6){ 
             setTimeout(() => {
-                showCongratulations() ;
+
                 return shuffleCard();
             }, 1200); 
             
@@ -86,14 +90,14 @@ function updateMoves() {
 function startTimer() {
     let seconds = 0;
     const timerText = document.getElementById('timer');
-    timer = setInterval(() => {
+    timerInterval = setInterval(() => {
         seconds++;
         timerText.textContent = `Time: ${seconds}s`;
     }, 1000);
 }
 
 function stopTimer() {
-    clearInterval(timer);
+    clearInterval(timerInterval);
 }
 
 (function shuffle() {
@@ -126,7 +130,45 @@ function shuffleCard(){
 
     
 }
+function restartGame() {
+    // Reset game variables
+    matchedCard = 0;
+    cardOne = null;
+    cardTwo = null;
+    disableDeck = false;
+    moves = 0;
+    seconds = 0;
+  
+    // Reset cards
+    cards.forEach(card => {
+      card.classList.remove('flip', 'match', 'shake');
+      card.addEventListener('click', flipCard);
+    });
+  
+    // Reset star rating
+    stars.forEach(star => star.style.display = 'inline');
+  
+    // Reset moves
+    updateMoves();
+  
+    // Reset timer
+    stopTimer();
+    const timerText = document.getElementById('timer');
+    timerText.textContent = 'Time: 0s';
+  }
 shuffleCard();
 cards.forEach(card => { 
     card.addEventListener('click', flipCard); 
 });
+
+// function finishGame() {
+//     stopTimer();
+//     isGameFinished = true;
+//     // Show congratulations message and display moves and time
+//     const movesText = `Moves: ${moves}`;
+//     const timeText = `Time: ${seconds}s`;
+//     const ratingText = getStarRating();
+//     alert(`Congratulations!\n\nMoves: ${movesText}\nTime: ${timeText}\nRating: ${ratingText}`);
+//   }
+
+  

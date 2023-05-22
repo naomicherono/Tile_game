@@ -23,11 +23,15 @@ body{
 }
 h1{
     margin-bottom: 700px;
-    margin-right: -600px;
+    margin-right: -650px;
 }
-p{
-    
-}
+button{
+  border-radius:6px;
+  
+  font-size: x-large;
+  place-items: center;
+  background-color: blueviolet;}
+  
 
 .card .back img{
     max-width: 80px;
