@@ -87,6 +87,14 @@ button{
     max-width: 45px;
     
 }
+.card .card-back{
+    transform: rotateY(-180deg);
+    
+}
+.card .card-back img{
+    max-width: 45px;
+    
+}
 .card.flip .card-back{
     transform: rotateY(0);
 
@@ -94,64 +102,67 @@ button{
 .card.flip .card-front{
     transform: rotateY(180deg);
 }
+@keyframes shakeAnimation {
+  0% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(-5px);
+  }
+}
 
-  .card.flip {
-    transform: rotateY(180deg);
-    transition: transform 0.5s;
+
+@keyframes matchAnimation {
+  0% {
+    transform: scale(1);
   }
-  
-  .card.shake {
-    animation: shakeAnimation 0.5s;
+  50% {
+    transform: scale(1.2);
   }
-  
-  @keyframes shakeAnimation {
-    0% {
-      transform: translateX(-5px);
-    }
-    50% {
-      transform: translateX(5px);
-    }
-    100% {
-      transform: translateX(-5px);
-    }
+  100% {
+    transform: scale(1);
   }
-  .card.flip {
-    transform: rotateY(180deg);
-    transition: transform 0.5s;
+}
+.card.match {
+  background-color: yellow; 
+}
+
+@keyframes matchAnimation {
+  0% {
+    transform: scale(1);
+    /* background-color: yellow;  */
   }
-  
-  .card.match {
-    animation: matchAnimation 0.5s;
+  50% {
+    transform: scale(1.2);
+    background-color: orange; 
   }
-  
-  @keyframes matchAnimation {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1);
-    }
+  100% {
+    transform: scale(1);
+    background-color: yellow;
   }
-  .card.match {
-    animation: matchAnimation 0.5s;
-    background-color: yellow; 
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0);
   }
-  
-  @keyframes matchAnimation {
-    0% {
-      transform: scale(1);
-      /* background-color: yellow;  */
-    }
-    50% {
-      transform: scale(1.2);
-      background-color: orange; 
-    }
-    100% {
-      transform: scale(1);
-      background-color: yellow;
-    }
+  25% {
+    transform: rotate(-5deg);
   }
-  
+  50% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}

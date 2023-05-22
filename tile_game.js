@@ -1,14 +1,11 @@
 const cards = document.querySelectorAll('.card'); 
 let cardOne, cardTwo;
 let disableDeck = false;
-let matchedCard = 0;
-let moves = 0;
-const stars = document.querySelectorAll('.fa-star');
+let matchedCard = 0; 
+let moves =0;
 let timer = null;
-let seconds =0;
-
-const restartButton = document.getElementById('restart-button');
-restartButton.addEventListener('click', restartGame);
+let minutes = 0;
+let seconds = 0;
 
 
 function flipCard(e){ 
@@ -23,31 +20,22 @@ function flipCard(e){
         let cardOneImg = cardOne.querySelector('img').src, 
         cardTwoImg = cardTwo.querySelector('img').src; 
         matchCards(cardOneImg, cardTwoImg);
+        moves++;
+        updateMoves();
     }
 }
 function matchCards(img1, img2){ 
     if(img1 === img2){ 
         matchedCard++; 
         if(matchedCard == 6){ 
-            setTimeout(() => {
-
-                return shuffleCard();
+            setTimeout(() => { 
+                endGame();
             }, 1200); 
-            
-        
-        moves++;
-        updateMoves();
-      }
-      updateMoves();
-
-    
-          
-    cardOne.removeEventListener('click', flipCard);
-    cardTwo.removeEventListener('click', flipCard);
-    cardOne.classList.add('match');
-    cardTwo.classList.add('match');
+        }
+        cardOne.removeEventListener('click', flipCard);
+        cardTwo.removeEventListener('click', flipCard);
         cardOne = cardTwo = '';
-        disableDeck = false;
+        return disableDeck = false;
     }
     else{
         setTimeout(() => { 
@@ -61,43 +49,27 @@ function matchCards(img1, img2){
             disableDeck = false;
         }, 1200);
     }
-  
-}
-function updateRating() {
-    if (moves <= 10) {
-      
-      stars.forEach(star => star.style.display = 'inline');
-    } else if (moves <= 20) {
-      
-      stars[2].style.display = 'none';
-    } else {
-      
-      stars[1].style.display = 'none';
-    }
-  }
-
-
-function updateMoves() {
-    const movesText = document.getElementById('moves');
-    movesText.textContent = moves.toString();
-    updateRating();
-
-
 }
 
+function updateMoves(){
+    const movesElement = document.getElementById('moves');
+    movesElement.textContent = moves;
+}
 
-
-function startTimer() {
-    let seconds = 0;
-    const timerText = document.getElementById('timer');
-    timerInterval = setInterval(() => {
+function startTimer(){
+    timer = setInterval(() => {
         seconds++;
-        timerText.textContent = `Time: ${seconds}s`;
+        if (seconds === 60){
+            seconds = 0;
+            minutes++;
+        }
+        const timerElement = document.getElementById('timer');
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }, 1000);
 }
 
-function stopTimer() {
-    clearInterval(timerInterval);
+function stopTimer(){
+    clearInterval(timer);
 }
 
 (function shuffle() {
@@ -107,16 +79,20 @@ function stopTimer() {
     });
   })();
   
-  
+function endGame() {
+stopTimer();
+setTimeout(() => {
+    alert(`Congratulations! 🎉 You have completed the game. \n  You went ${moves} moves \n You spent  ${minutes} min ${seconds} seconds \n  Rating ⭐ ⭐ ⭐ ⭐` );
+}, 500);
+}
   
 function shuffleCard(){
     matchedCard = 0;
+    moves = 0;
+    minutes = 0;
+    seconds = 0;
     cardOne = cardTwo = '';
     disableDeck=false;
-    moves = 0;
-    updateMoves();
-    stopTimer();
-    startTimer();
     let arr = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]; 
     arr.sort(() => Math.random() > 0.5 ? 1 : -1);
     cards.forEach((card, index) => { 
@@ -124,51 +100,11 @@ function shuffleCard(){
         card.addEventListener('click', flipCard);
         let imgTag = card.querySelector('img');
         card.addEventListener("click",flipCard);
-
-    
     });
-
-    
-}
-function restartGame() {
-    // Reset game variables
-    matchedCard = 0;
-    cardOne = null;
-    cardTwo = null;
-    disableDeck = false;
-    moves = 0;
-    seconds = 0;
-  
-    // Reset cards
-    cards.forEach(card => {
-      card.classList.remove('flip', 'match', 'shake');
-      card.addEventListener('click', flipCard);
-    });
-  
-    // Reset star rating
-    stars.forEach(star => star.style.display = 'inline');
-  
-    // Reset moves
     updateMoves();
-  
-    // Reset timer
-    stopTimer();
-    const timerText = document.getElementById('timer');
-    timerText.textContent = 'Time: 0s';
-  }
+    startTimer();
+}
 shuffleCard();
 cards.forEach(card => { 
     card.addEventListener('click', flipCard); 
 });
-
-// function finishGame() {
-//     stopTimer();
-//     isGameFinished = true;
-//     // Show congratulations message and display moves and time
-//     const movesText = `Moves: ${moves}`;
-//     const timeText = `Time: ${seconds}s`;
-//     const ratingText = getStarRating();
-//     alert(`Congratulations!\n\nMoves: ${movesText}\nTime: ${timeText}\nRating: ${ratingText}`);
-//   }
-
-  
