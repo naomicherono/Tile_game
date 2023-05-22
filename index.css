@@ -11,7 +11,7 @@ body{
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: rgb(38, 51, 7);
+    background-color: rgb(205, 223, 107);
 }
 
 .card .back img{
@@ -52,7 +52,7 @@ body{
     height: 100%;
     pointer-events: none;
     user-select: none;
-    background-color: #f9fcf7;
+    background-color: #34c7b3;
     border-radius: 5px 0;
     transition: transform 0.25s linear;
     position: absolute;
@@ -75,3 +75,64 @@ body{
 .card.flip .card-front{
     transform: rotateY(180deg);
 }
+
+  .card.flip {
+    transform: rotateY(180deg);
+    transition: transform 0.5s;
+  }
+  
+  .card.shake {
+    animation: shakeAnimation 0.5s;
+  }
+  
+  @keyframes shakeAnimation {
+    0% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    100% {
+      transform: translateX(-5px);
+    }
+  }
+  .card.flip {
+    transform: rotateY(180deg);
+    transition: transform 0.5s;
+  }
+  
+  .card.match {
+    animation: matchAnimation 0.5s;
+  }
+  
+  @keyframes matchAnimation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .card.match {
+    animation: matchAnimation 0.5s;
+    background-color: yellow; 
+  }
+  
+  @keyframes matchAnimation {
+    0% {
+      transform: scale(1);
+      background-color: yellow; 
+    }
+    50% {
+      transform: scale(1.2);
+      background-color: orange; 
+    }
+    100% {
+      transform: scale(1);
+      background-color: yellow;
+    }
+  }
+  
