@@ -1,7 +1,9 @@
 const cards = document.querySelectorAll('.card'); 
 let cardOne, cardTwo;
 let disableDeck = false;
-let matchedCard = 0; 
+let matchedCard = 0;
+let moves = 0;
+let timer = null;
 
 function flipCard(e){ 
     let clickedCard = e.target; 
@@ -21,14 +23,17 @@ function matchCards(img1, img2){
     if(img1 === img2){ 
         matchedCard++; 
         if(matchedCard == 6){ 
-            setTimeout(() => { 
+            setTimeout(() => {
+                showCongratulations() ;
                 return shuffleCard();
             }, 1200); 
         }
-        cardOne.removeEventListener('click', flipCard);
-        cardTwo.removeEventListener('click', flipCard);
+    cardOne.removeEventListener('click', flipCard);
+    cardTwo.removeEventListener('click', flipCard);
+    cardOne.classList.add('match');
+    cardTwo.classList.add('match');
         cardOne = cardTwo = '';
-        return disableDeck = false;
+        disableDeck = false;
     }
     else{
         setTimeout(() => { 
@@ -42,8 +47,28 @@ function matchCards(img1, img2){
             disableDeck = false;
         }, 1200);
     }
+    moves++;
+    updateMoves();
 }
 
+
+function updateMoves() {
+    const movesText = document.getElementById('moves');
+    movesText.textContent = `Moves: ${moves}`;
+}
+
+function startTimer() {
+    let seconds = 0;
+    const timerText = document.getElementById('timer');
+    timer = setInterval(() => {
+        seconds++;
+        timerText.textContent = `Time: ${seconds}s`;
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timer);
+}
 
 (function shuffle() {
     cards.forEach(card => {
@@ -58,15 +83,22 @@ function shuffleCard(){
     matchedCard = 0;
     cardOne = cardTwo = '';
     disableDeck=false;
+    moves = 0;
+    updateMoves();
+    stopTimer();
+    startTimer();
     let arr = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]; 
     arr.sort(() => Math.random() > 0.5 ? 1 : -1);
     cards.forEach((card, index) => { 
         card.classList.remove('flip');
         card.addEventListener('click', flipCard);
         let imgTag = card.querySelector('img');
-        // imgTag.src = `images/img-${arr[index]}.png`;
         card.addEventListener("click",flipCard);
+
+    
     });
+
+    
 }
 shuffleCard();
 cards.forEach(card => { 
